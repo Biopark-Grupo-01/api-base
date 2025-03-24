@@ -7,7 +7,20 @@ export const getUser = async (req, res, next) => {
 
     res
       .status(httpStatus.OK)
-      .send(user)
+      .json({
+        user,
+        _links: {
+          self: {
+            href: `/api/users/${user._id}`,
+          },
+          update: {
+            href: `/api/users/${user._id}`,
+          },
+          delete: {
+            href: `/api/users/${user._id}`,
+          },
+        },
+      })
   } catch (err) {
     console.error(err);
     res
@@ -24,7 +37,29 @@ export const getUsers = async (req, res, next) => {
 
     res
       .status(httpStatus.OK)
-      .send(user)
+      .json({
+        user,
+        _links: {
+          self: {
+            href: "/api/users",
+          },
+          user: {
+            href: "/api/users/:id",
+          },
+          create: {
+            href: "/api/users",
+          },
+          update: {
+            href: "/api/users/:id",
+          },
+          delete: {
+            href: "/api/users/:id",
+          },
+        },
+        meta: {
+          count: user.length,
+        },
+      })
   } catch (err) {
     console.error(err);
     res
@@ -37,11 +72,27 @@ export const getUsers = async (req, res, next) => {
 
 export const createUser = async (req, res, next) => {
   try {
-    await new User(req.body).save();
+    const user = await new User(req.body).save();
 
     res
       .status(httpStatus.CREATED)
-      .send();
+      .json({
+        user,
+        _links: {
+          self: {
+            href: `/api/users`,
+          },
+          user: {
+            href: `/api/users/${user._id}`,
+          },
+          update: {
+            href: `/api/users/${user._id}`,
+          },
+          delete: {
+            href: `/api/users/${user._id}`,
+          },
+        },
+      });
   } catch (err) {
     res
       .status(httpStatus.INTERNAL_SERVER_ERROR)
@@ -53,11 +104,29 @@ export const createUser = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
   try {
-    await User.updateOne(req.params, req.body);
+    const user = await User.findOneAndUpdate(req.params, req.body, {
+      new: true,
+    });
 
     res
       .status(httpStatus.OK)
-      .send()
+      .json({
+        user,
+        _links: {
+          self: {
+            href: `/api/users/${user._id}`,
+          },
+          user: {
+            href: `/api/users/${user._id}`,
+          },
+          create: {
+            href: "/api/users",
+          },
+          delete: {
+            href: `/api/users/${user._id}`,
+          },
+        }
+      })
   } catch (err) {
     console.error(err);
     res
