@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -134,3 +135,34 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+=======
+# Cache
+.npm
+
+# Logs
+*.log
+*.log.*
+npm-debug.log*
+
+# Dependency
+node_modules
+
+# Environment
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Temp
+*.tmp
+*.tmp.*
+
+# MacOs
+._*
+.DS_*
+.DS_Store
+.DS_Store?
+.Trashes
+Thumbs.db
+>>>>>>> db80ccb (first commit)
