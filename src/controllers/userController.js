@@ -14,7 +14,7 @@ export const getUsers = async (req, res, next) => {
   try {
     const users = await User.find();
 
-    res.hateos_list(users);
+    res.hateoas_list(users);
   } catch (err) {
     next(err);
   }
@@ -36,7 +36,7 @@ export const updateUser = async (req, res, next) => {
       new: true,
     });
 
-    res.hateos_item(user);
+    res.hateoas_item(user);
   } catch (err) {
     next(err);
   }
