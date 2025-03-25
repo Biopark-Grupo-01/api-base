@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# api-base
-=======
 # Tecnologias Emergentes - Template 01
 
 Este projeto tem como objetivo proporcionar um ambiente prático para o desenvolvimento e treinamento na criação de APIs utilizando **Node.js** e **Express**. Com a crescente demanda por aplicações baseadas em arquitetura de micro-serviços e integrações via APIs.
@@ -33,4 +30,3 @@ Para executar o projeto pode ser executado os comandos
 $ npm start
 $ npm run start:watch
 ```
->>>>>>> db80ccb (first commit)
