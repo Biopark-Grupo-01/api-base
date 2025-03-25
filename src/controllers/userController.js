@@ -8,18 +8,29 @@ export const getUser = async (req, res, next) => {
     res
       .status(httpStatus.OK)
       .json({
-        user,
-        _links: {
-          self: {
-            href: `/api/users/${user._id}`,
+        ...user._doc,
+        _links: [
+          {
+            rel: "self",
+            href: req.originalUrl,
+            method: req.method,
           },
-          update: {
-            href: `/api/users/${user._id}`,
+          {
+            rel: "list",
+            href: req.baseUrl,
+            method: "GET",
           },
-          delete: {
-            href: `/api/users/${user._id}`,
+          {
+            rel: "update",
+            href: `${req.baseUrl}/${req.params._id}`,
+            method: "PUT",
           },
-        },
+          {
+            rel: "delete",
+            href: `${req.baseUrl}/${req.params._id}`,
+            method: "DELETE",
+          },
+        ],
       })
   } catch (err) {
     console.error(err);
@@ -33,29 +44,33 @@ export const getUser = async (req, res, next) => {
 
 export const getUsers = async (req, res, next) => {
   try {
-    const user = await User.find();
+    const users = await User.find();
 
     res
       .status(httpStatus.OK)
       .json({
-        user,
-        _links: {
-          self: {
-            href: "/api/users",
+        users: users.map(user => ({
+          ...user._doc,
+          _links: [
+            {
+              rel: "self",
+              href: `${req.baseUrl}/${user._id}`,
+              method: "GET",
+            },
+          ],
+        })),
+        _links: [
+          {
+            rel: "self",
+            href: req.originalUrl,
+            method: req.method,
           },
-          user: {
-            href: "/api/users/:id",
+          {
+            rel: "create",
+            href: req.baseUrl,
+            method: "POST",
           },
-          create: {
-            href: "/api/users",
-          },
-          update: {
-            href: "/api/users/:id",
-          },
-          delete: {
-            href: "/api/users/:id",
-          },
-        },
+        ],
         meta: {
           count: user.length,
         },
@@ -72,27 +87,11 @@ export const getUsers = async (req, res, next) => {
 
 export const createUser = async (req, res, next) => {
   try {
-    const user = await new User(req.body).save();
+    await new User(req.body).save();
 
     res
       .status(httpStatus.CREATED)
-      .json({
-        user,
-        _links: {
-          self: {
-            href: `/api/users`,
-          },
-          user: {
-            href: `/api/users/${user._id}`,
-          },
-          update: {
-            href: `/api/users/${user._id}`,
-          },
-          delete: {
-            href: `/api/users/${user._id}`,
-          },
-        },
-      });
+      .send();
   } catch (err) {
     res
       .status(httpStatus.INTERNAL_SERVER_ERROR)
@@ -111,21 +110,24 @@ export const updateUser = async (req, res, next) => {
     res
       .status(httpStatus.OK)
       .json({
-        user,
-        _links: {
-          self: {
-            href: `/api/users/${user._id}`,
+        ...user._doc,
+        _links: [
+          {
+            rel: "self",
+            href: req.originalUrl,
+            method: req.method,
           },
-          user: {
-            href: `/api/users/${user._id}`,
+          {
+            rel: "list",
+            href: req.baseUrl,
+            method: "GET",
           },
-          create: {
-            href: "/api/users",
+          {
+            rel: "delete",
+            href: `${req.baseUrl}/${req.params._id}`,
+            method: "DELETE",
           },
-          delete: {
-            href: `/api/users/${user._id}`,
-          },
-        }
+        ],
       })
   } catch (err) {
     console.error(err);
