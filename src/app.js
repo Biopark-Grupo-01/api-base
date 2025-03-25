@@ -4,7 +4,7 @@ import compression from "compression";
 import express from "express";
 import morgan from "morgan";
 import handlers from "./middlewares/handlers.js";
-import hateos from "./middlewares/hateos.js";
+import hateoas from "./middlewares/hateoas.js";
 import dotenv from "dotenv";
 
 import database from "./config/database.js";
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(handlers);
-app.use(hateos);
+app.use(hateoas);
 app.use(routes);
 
 export default app;
