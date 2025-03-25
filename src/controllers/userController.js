@@ -46,7 +46,7 @@ export const deleteUser = async (req, res, next) => {
   try {
     await User.deleteOne(req.params);
 
-    res.OK();
+    res.NO_CONTENT();
   } catch (err) {
     next(err);
   }

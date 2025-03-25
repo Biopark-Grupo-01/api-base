@@ -5,9 +5,13 @@ export default (req, res, next) => {
     res.status(httpStatus.CREATED).send();
   };
 
-  res.OK = () => {
-    res.status(httpStatus.OK).send();
+  res.OK = (data) => {
+    res.status(httpStatus.OK).json(data);
   };
+
+  res.NO_CONTENT = () => {
+    res.status(httpStatus.NO_CONTENT).send();
+  }
 
   next();
 }

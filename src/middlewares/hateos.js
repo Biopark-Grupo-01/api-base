@@ -1,8 +1,6 @@
-import httpStatus from "http-status";
-
 export default (req, res, next) => {
   res.hateos_item = (data) => {
-    res.status(httpStatus.OK).json({
+    res.OK({
       ...data._doc,
       _links: [
         {
@@ -30,7 +28,7 @@ export default (req, res, next) => {
   };
 
   res.hateos_list = (data) => {
-    res.status(httpStatus.OK).json({
+    res.OK({
       data: data.map((item) => ({
         ...item._doc,
         _links: [
