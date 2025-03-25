@@ -1,5 +1,5 @@
 import User from "../models/usermodel.js";
-import httpStatus from "http-status"
+import httpStatus from "http-status";
 
 export const getUser = async (req, res, next) => {
   try {
@@ -7,12 +7,7 @@ export const getUser = async (req, res, next) => {
 
     res.hateos_item(user);
   } catch (err) {
-    console.error(err);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        message: err.message,
-      })
+    next(err);
   }
 };
 
@@ -22,12 +17,7 @@ export const getUsers = async (req, res, next) => {
 
     res.hateos_list(users);
   } catch (err) {
-    console.error(err);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        message: err.message,
-      })
+    next(err);
   }
 };
 
@@ -35,15 +25,9 @@ export const createUser = async (req, res, next) => {
   try {
     await new User(req.body).save();
 
-    res
-      .status(httpStatus.CREATED)
-      .send();
+    res.status(httpStatus.CREATED).send();
   } catch (err) {
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        message: err.message
-      })
+    next(err);
   }
 };
 
@@ -55,12 +39,7 @@ export const updateUser = async (req, res, next) => {
 
     res.hateos_item(user);
   } catch (err) {
-    console.error(err);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        message: err.message,
-      })
+    next(err);
   }
 };
 
@@ -68,15 +47,8 @@ export const deleteUser = async (req, res, next) => {
   try {
     await User.deleteOne(req.params);
 
-    res
-      .status(httpStatus.OK)
-      .send()
+    res.status(httpStatus.OK).send();
   } catch (err) {
-    console.error(err);
-    res
-      .status(httpStatus.INTERNAL_SERVER_ERROR)
-      .json({
-        message: err.message,
-      })
+    next(err);
   }
 };
