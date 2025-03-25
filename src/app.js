@@ -3,6 +3,7 @@ import helmet from "helmet";
 import compression from "compression";
 import express from "express";
 import morgan from "morgan";
+import handlers from "./middlewares/handlers.js";
 import hateos from "./middlewares/hateos.js";
 import dotenv from "dotenv";
 
@@ -20,6 +21,7 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
+app.use(handlers);
 app.use(hateos);
 app.use(routes);
 

@@ -1,5 +1,4 @@
 import User from "../models/usermodel.js";
-import httpStatus from "http-status";
 
 export const getUser = async (req, res, next) => {
   try {
@@ -25,7 +24,7 @@ export const createUser = async (req, res, next) => {
   try {
     await new User(req.body).save();
 
-    res.status(httpStatus.CREATED).send();
+    res.CREATED();
   } catch (err) {
     next(err);
   }
@@ -47,7 +46,7 @@ export const deleteUser = async (req, res, next) => {
   try {
     await User.deleteOne(req.params);
 
-    res.status(httpStatus.OK).send();
+    res.OK();
   } catch (err) {
     next(err);
   }
