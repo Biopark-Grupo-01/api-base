@@ -11,7 +11,11 @@ export default (req, res, next) => {
 
   res.NO_CONTENT = () => {
     res.status(httpStatus.NO_CONTENT).send();
-  }
+  };
+
+  res.PAYMENT_REQUIRED = (err) => {
+    res.status(httpStatus.PAYMENT_REQUIRED).json();
+  };
 
   next();
 }

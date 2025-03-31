@@ -22,7 +22,13 @@ export const getUsers = async (req, res, next) => {
 
 export const createUser = async (req, res, next) => {
   try {
-    await new User(req.body).save();
+    const { name, email, password } = req.body;
+
+    await new User({
+      name,
+      email,
+      password,
+    }).save();
 
     res.CREATED();
   } catch (err) {
@@ -32,7 +38,13 @@ export const createUser = async (req, res, next) => {
 
 export const updateUser = async (req, res, next) => {
   try {
-    const user = await User.findOneAndUpdate(req.params, req.body, {
+    const { name, email, password } = req.body;
+
+    const user = await User.findOneAndUpdate(req.params,{
+      name,
+      email,
+      password,
+    }, {
       new: true,
     });
 

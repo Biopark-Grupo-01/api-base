@@ -8,12 +8,14 @@ import {
   deleteUser
 } from "../controllers/userController.js";
 
-const router = Router();
+import validator from "../middleware/validator.js";
+import schema from "./userValidator.js";
 
+const router = Router();
 router.get("/:_id", getUser);
 router.get("/", getUsers);
-router.post("/", createUser);
-router.put("/:_id", updateUser);
+router.post("/", validator(schema), createUser);
+router.put("/:_id", validator(schema), updateUser);
 router.delete("/:_id", deleteUser);
 
 export default router;
