@@ -19,6 +19,6 @@ export default yup
       .matches(/(?=.*[0-9])/, "Password must contain a number")
       .matches(/(?=.*[a-z])/, "Password must contain a lowercase letter")
       .matches(/(?=.*[A-Z])/, "Password must contain an uppercase letter")
-      .matches(/(?=.*[!@#$%^&*])/, "Password must contain a special character")
+      .matches(/(?=.*[!@#$%^&*-.])/, "Password must contain a special character")
       .required("Required (password)"),
   });

@@ -4,6 +4,8 @@ export default (schema) => (req, res, next) => {
       abortEarly: false,
       recursive: true,
     });
+
+    next();
   } catch (err) {
     res.PAYMENT_REQUIRED({
       message: err.message,
