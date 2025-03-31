@@ -4,7 +4,7 @@ export const getUser = async (req, res, next) => {
   try {
     const user = await User.findOne(req.params);
 
-    res.hateos_item(user);
+    res.hateoas_item(user);
   } catch (err) {
     next(err);
   }
