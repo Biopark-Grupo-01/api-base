@@ -14,7 +14,7 @@ export default (req, res, next) => {
   };
 
   res.PAYMENT_REQUIRED = (err) => {
-    res.status(httpStatus.PAYMENT_REQUIRED).json();
+    res.status(httpStatus.PAYMENT_REQUIRED).json(err);
   };
 
   next();
