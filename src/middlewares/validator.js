@@ -7,7 +7,7 @@ export default (schema) => (req, res, next) => {
 
     next();
   } catch (err) {
-    res.PAYMENT_REQUIRED({
+    res.BAD_REQUEST({
       message: err.message,
       errors: err.errors,
     })

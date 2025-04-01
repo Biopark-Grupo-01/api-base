@@ -17,5 +17,9 @@ export default (req, res, next) => {
     res.status(httpStatus.PAYMENT_REQUIRED).json(err);
   };
 
+  res.BED_REQUEST = (err) => {
+    res.status(httpStatus.BAD_REQUEST).json(err);
+  };
+
   next();
 }
