@@ -8,7 +8,7 @@ import {
   deleteProduct
 } from "../../controllers/productController.js";
 
-import validator from "../../../middlewares/validator.js";
+import validator from "../../middlewares/validator.js";
 import schema from "./productValidator.js";
 
 const router = Router();

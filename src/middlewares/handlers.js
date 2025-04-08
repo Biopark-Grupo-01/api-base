@@ -13,13 +13,25 @@ export default (req, res, next) => {
     res.status(httpStatus.NO_CONTENT).send();
   };
 
-  res.PAYMENT_REQUIRED = (err) => {
-    res.status(httpStatus.PAYMENT_REQUIRED).json(err);
-  };
-
-  res.BED_REQUEST = (err) => {
+  res.BAD_REQUEST = (err) => {
     res.status(httpStatus.BAD_REQUEST).json(err);
   };
+
+  res.INTERNAL_SERVER_ERROR = (err) => {
+  /*
+    #swagger.responses[500] = {
+      schema: {
+       $ref: "#/definitions/InternalServerError",
+      },
+    }
+  */
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json(err);
+  };
+
+  res.UNAUTHORIZED = () => {
+    res.status(httpStatus.UNAUTHORIZED).send();
+  }
+
 
   next();
 }

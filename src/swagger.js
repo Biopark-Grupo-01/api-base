@@ -1,5 +1,5 @@
 import swaggerAutogen from 'swagger-autogen';
-import User from './v1/models/userModel.js';
+import User from './models/userModel.js';
 
 const doc = {
   info: {
@@ -18,6 +18,10 @@ const doc = {
         code: '',
         message: '',
       },
+      Login: {
+        email: '',
+        password: '',
+      },
       User: {
         name : '',
         email : '',
@@ -29,6 +33,12 @@ const doc = {
         stock : 0,
         price : 0,
       },
+    },
+    securitySchemes: {
+      bearerAuth: {
+        type: "http",
+        scheme: "bearer"
+      }
     },
   },
 };
