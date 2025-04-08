@@ -1,6 +1,12 @@
 import Product from "../models/productModel.js";
 
 export const getProduct = async (req, res, next) => {
+  /*
+    #swagger.tags = ['Product']
+    #swagger.summary = 'Get product by id'
+    #swagger.description = 'Get product by id'
+    #swagger.responses[200]
+  */
   try {
     const product = await Product.findOne(req.params);
 
@@ -11,6 +17,12 @@ export const getProduct = async (req, res, next) => {
 };
 
 export const getProducts = async (req, res, next) => {
+  /*
+    #swagger.tags = ['Product']
+    #swagger.summary = 'Get all products'
+    #swagger.description = 'Get all products'
+    #swagger.responses[200]
+  */
   try {
     const { _page, _size, _order, ...filter} = req.query;
     const page = parseInt(_page) || 1;
@@ -34,13 +46,29 @@ export const getProducts = async (req, res, next) => {
 };
 
 export const createProduct = async (req, res, next) => {
+  /*
+    #swagger.tags = ['Product']
+    #swagger.summary = 'Create product'
+    #swagger.description = 'Create product'
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            $ref: "#/definitions/Product",
+          },
+        },
+      },
+    }
+    #swagger.responses[201]
+  */
   try {
-    const { name, description, quantity, price } = req.body;
+    const { name, description, stock, price } = req.body;
 
     await new Product({
       name,
       description,
-      quantity,
+      stock,
       price,
     }).save();
 
@@ -51,13 +79,29 @@ export const createProduct = async (req, res, next) => {
 };
 
 export const updateProduct = async (req, res, next) => {
+  /*
+    #swagger.tags = ['Product']
+    #swagger.summary = 'Update product'
+    #swagger.description = 'Update product'
+    #swagger.requestBody = {
+      required: true,
+      content: {
+        'application/json': {
+          schema: {
+            $ref: "#/definitions/Product",
+          },
+        },
+      },
+    }
+    #swagger.responses[200]
+  */
   try {
-    const { name, description, quantity, price } = req.body;
+    const { name, description, stock, price } = req.body;
 
     const product = await Product.findOneAndUpdate(req.params,{
       name,
       description,
-      quantity,
+      stock,
       price,
     }, {
       new: true,
@@ -70,6 +114,12 @@ export const updateProduct = async (req, res, next) => {
 };
 
 export const deleteProduct = async (req, res, next) => {
+  /*
+    #swagger.tags = ['Product']
+    #swagger.summary = 'Delete product'
+    #swagger.description = 'Delete product'
+    #swagger.responses[204]
+  */
   try {
     await Product.deleteOne(req.params);
 
