@@ -33,6 +33,10 @@ const doc = {
         stock : 0,
         price : 0,
       },
+      Task: {
+        description : '',
+        done : false,
+      },
     },
     securitySchemes: {
       bearerAuth: {
